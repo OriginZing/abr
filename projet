@@ -1,0 +1,130 @@
+import csv
+
+liste_joueurs=[]
+with open("quentin.csv",'r',encoding='utf-8') as f:
+    lecteur=csv.reader(f,delimiter=',')
+    for ligne in lecteur:
+        liste_joueurs.append(ligne)
+ import csv 
+
+
+class ABR() :
+    def __init__(self,valeur=None):
+        self.valeur=valeur
+        self.gauche=None
+        self.droit=None
+            
+    def ajout(self,element,comp):
+        if self.valeur is None :
+            self.valeur=element
+        elif comp(self.valeur):
+            if self.gauche is None :
+                self.gauche=ABR(element)
+            else :
+                self.gauche.ajout(element,comp)
+        else :
+            if self.droit is None :
+                self.droit=ABR(element)
+            else :
+                self.droit.ajout(element,comp)
+                
+    def infixe(self):
+        if not self.gauche is None :
+            self.gauche.infixe()
+        print(self.valeur,end="\n")
+        if not self.droit is None:
+            self.droit.infixe()
+            
+    def mini(self):
+        if not self.gauche is None :
+            return(self.gauche.mini())
+        return self.valeur
+        
+    def maxi(self):
+        if not self.droit is None :
+            return(self.droit.maxi())
+        return self.valeur
+            
+    def __str__ (self):
+        if self.valeur is None:
+            return "()"
+        else :
+            repr_left=str(self.gauche)
+            repr_right=str(self.droit)
+            return '({:s}, {:s}, {:s})'.format(str(self.valeur), repr_left, repr_right)
+     import csv
+
+class cdm :
+    def __init__(self,liste):
+        self.groupe=liste[0]
+        self.equipe=liste[1]
+        self.classe=int(liste[2])
+        self.sel=liste[3]
+        self.nat_sel=liste[4]
+        self.num=int(liste[5])
+        self.id=int(liste[6])
+        self.joueur=liste[7]
+        self.poste=liste[8]
+        self.ddn=liste[9]
+        self.age=int(liste[10])
+        self.selections=int(liste[11])
+        self.champ=liste[12]
+        self.club=liste[13]
+        self.champ_dom=liste[14]
+        self.nbj=int(liste[15])
+        
+    def getGroupe(self):
+        return self.groupe
+    
+    def getEquipe(self):
+        return self.equipe
+    
+    def getClassement(self):
+        return self.classe
+    
+    def getSelectionneur(self):
+        return self.sel
+    
+    def getNatsel(self):
+        return self.nat_sel
+    
+    def getNum(self):
+        return self.num
+    
+    def getId(self):
+        return self.id
+    
+    def getJoueur(self):
+        return self.joueur
+    
+    def getPoste(self):
+        return self.poste
+    
+    def getDate(self):
+        dico={'Jan':"01",'Feb':"02",'Mar':"03",'Apr':"04",'May':"05",'Jun':"06",'Jul':"07",'Aug':"08",'Sep':"09",'Oct':"10",'Nov':"11",'Dec':"12"}
+        d=self.date
+        return int(d[7:9]+dico[d[3:6]]+d[0:2])
+    
+    def getAge(self):
+        return self.age
+    
+    def getSelections(self):
+        return self.selections
+
+    def getChampionnat(self):
+        return self.champ
+
+    def getClub(self):
+        return self.club
+
+    def getChampionnat_domestique(self):
+        return self.champ_dom
+
+    def getNombre_jour(self):
+        return self.nbj
+
+    def compAge(self, j2):
+        return self.getAge()<j2.getAge
+
+    def ageMin(self):
+      return min(self.getAge.mini())
